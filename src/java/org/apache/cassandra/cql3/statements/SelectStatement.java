@@ -105,6 +105,8 @@ import static org.apache.cassandra.cql3.statements.RequestValidations.checkNotNu
 import static org.apache.cassandra.cql3.statements.RequestValidations.checkNull;
 import static org.apache.cassandra.cql3.statements.RequestValidations.checkTrue;
 import static org.apache.cassandra.utils.ByteBufferUtil.UNSET_BYTE_BUFFER;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 /**
  * Encapsulates a completely parsed SELECT query, including the target
@@ -1280,6 +1282,12 @@ public class SelectStatement implements CQLStatement
             this.allowFiltering = allowFiltering;
             this.isJson = isJson;
         }
+        
+        @Override
+        public String toString()
+        {
+            return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        }
     }
 
     private static abstract class ColumnComparator<T> implements Comparator<T>
@@ -1342,5 +1350,11 @@ public class SelectStatement implements CQLStatement
 
             return 0;
         }
+    }
+    
+    @Override
+    public String toString()
+    {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 }

@@ -35,6 +35,8 @@ import org.apache.cassandra.transport.CBUtil;
 import org.apache.cassandra.transport.ProtocolException;
 import org.apache.cassandra.transport.ProtocolVersion;
 import org.apache.cassandra.utils.Pair;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 /**
  * Options for a query.
@@ -302,6 +304,12 @@ public abstract class QueryOptions
         {
             return columnSpecs;
         }
+        
+        @Override
+        public String toString()
+        {
+            return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        }
     }
 
     static class OptionsWithNames extends QueryOptionsWrapper
@@ -342,6 +350,12 @@ public abstract class QueryOptions
             assert orderedValues != null; // We should have called prepare first!
             return orderedValues;
         }
+        
+        @Override
+        public String toString()
+        {
+            return new ToStringBuilder(this).append("names", names).toString();
+        }
     }
 
     // Options that are likely to not be present in most queries
@@ -360,6 +374,12 @@ public abstract class QueryOptions
             this.state = state;
             this.serialConsistency = serialConsistency == null ? ConsistencyLevel.SERIAL : serialConsistency;
             this.timestamp = timestamp;
+        }
+        
+        @Override
+        public String toString()
+        {
+            return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
         }
     }
 
@@ -512,5 +532,11 @@ public abstract class QueryOptions
                 flags.add(Flag.TIMESTAMP);
             return flags;
         }
+    }
+    
+    @Override
+    public String toString()
+    {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 }

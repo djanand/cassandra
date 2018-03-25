@@ -36,6 +36,9 @@ import static org.apache.cassandra.cql3.statements.RequestValidations.checkConta
 import static org.apache.cassandra.cql3.statements.RequestValidations.checkFalse;
 import static org.apache.cassandra.cql3.statements.RequestValidations.checkTrue;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 /**
  * An <code>UPDATE</code> statement parsed from a CQL query statement.
  *
@@ -361,5 +364,17 @@ public class UpdateStatement extends ModificationStatement
                                        conditions,
                                        attrs);
         }
+        
+        @Override
+        public String toString()
+        {
+            return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        }
+    }
+    
+    @Override
+    public String toString()
+    {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 }

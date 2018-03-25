@@ -22,6 +22,8 @@ import org.apache.cassandra.config.CFMetaData;
 import org.apache.cassandra.cql3.*;
 import org.apache.cassandra.db.filter.RowFilter;
 import org.apache.cassandra.db.marshal.AbstractType;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 public class CustomIndexExpression
 {
@@ -54,5 +56,11 @@ public class CustomIndexExpression
                                            .get(targetIndex.getIdx())
                                            .orElseThrow(() -> IndexRestrictions.indexNotFound(targetIndex, cfm)),
                                         value.bindAndGet(options));
+    }
+    
+    @Override
+    public String toString()
+    {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 }

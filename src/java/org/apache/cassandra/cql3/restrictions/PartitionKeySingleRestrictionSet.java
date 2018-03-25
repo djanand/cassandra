@@ -28,6 +28,8 @@ import org.apache.cassandra.db.ClusteringPrefix;
 import org.apache.cassandra.db.MultiCBuilder;
 import org.apache.cassandra.db.filter.RowFilter;
 import org.apache.cassandra.index.SecondaryIndexManager;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 /**
  * A set of single restrictions on the partition key.
@@ -155,5 +157,11 @@ final class PartitionKeySingleRestrictionSet extends RestrictionSetWrapper imple
                 return true;
         }
         return false;
+    }
+    
+    @Override
+    public String toString()
+    {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 }

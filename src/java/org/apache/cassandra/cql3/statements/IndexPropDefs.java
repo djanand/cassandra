@@ -22,6 +22,8 @@ import java.util.*;
 import org.apache.cassandra.exceptions.InvalidRequestException;
 import org.apache.cassandra.exceptions.RequestValidationException;
 import org.apache.cassandra.exceptions.SyntaxException;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 public class IndexPropDefs extends PropertyDefinitions
 {
@@ -72,5 +74,11 @@ public class IndexPropDefs extends PropertyDefinitions
         Map<String, String> options = new HashMap<>(getRawOptions());
         options.put(IndexTarget.CUSTOM_INDEX_OPTION_NAME, customClass);
         return options;
+    }
+    
+    @Override
+    public String toString()
+    {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 }
