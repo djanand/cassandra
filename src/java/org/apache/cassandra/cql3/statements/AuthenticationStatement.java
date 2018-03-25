@@ -27,6 +27,8 @@ import org.apache.cassandra.exceptions.UnauthorizedException;
 import org.apache.cassandra.service.ClientState;
 import org.apache.cassandra.service.QueryState;
 import org.apache.cassandra.transport.messages.ResultMessage;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 public abstract class AuthenticationStatement extends ParsedStatement implements CQLStatement
 {
@@ -68,6 +70,12 @@ public abstract class AuthenticationStatement extends ParsedStatement implements
                                                           "to perform the requested operation",
                                                           state.getUser().getName()));
         }
+    }
+    
+    @Override
+    public String toString()
+    {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 }
 

@@ -258,4 +258,7 @@ public abstract class Relation
      *         a new Relation with "from" replaced by "to" is returned.
      */
     public abstract Relation renameIdentifier(ColumnMetadata.Raw from, ColumnMetadata.Raw to);
+    
+    @Override
+    public abstract String toString();
 }

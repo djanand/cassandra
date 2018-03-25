@@ -17,6 +17,8 @@
  */
 package org.apache.cassandra.cql3.restrictions;
 
+import static org.apache.cassandra.cql3.statements.RequestValidations.*;
+
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,12 +35,8 @@ import org.apache.cassandra.index.Index;
 import org.apache.cassandra.index.SecondaryIndexManager;
 import org.apache.cassandra.utils.ByteBufferUtil;
 import org.apache.cassandra.utils.Pair;
-
-import static org.apache.cassandra.cql3.statements.RequestValidations.checkBindValueSet;
-import static org.apache.cassandra.cql3.statements.RequestValidations.checkFalse;
-import static org.apache.cassandra.cql3.statements.RequestValidations.checkNotNull;
-import static org.apache.cassandra.cql3.statements.RequestValidations.checkTrue;
-import static org.apache.cassandra.cql3.statements.RequestValidations.invalidRequest;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 public abstract class SingleColumnRestriction implements SingleRestriction
 {
@@ -775,5 +773,11 @@ public abstract class SingleColumnRestriction implements SingleRestriction
             newValue.limit(endIndex);
             return Pair.create(operator, newValue);
         }
+    }
+    
+    @Override
+    public String toString()
+    {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 }

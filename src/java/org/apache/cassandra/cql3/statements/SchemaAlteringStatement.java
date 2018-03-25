@@ -27,6 +27,8 @@ import org.apache.cassandra.service.ClientState;
 import org.apache.cassandra.service.QueryState;
 import org.apache.cassandra.transport.Event;
 import org.apache.cassandra.transport.messages.ResultMessage;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 /**
  * Abstract class for statements that alter the schema.
@@ -119,5 +121,11 @@ public abstract class SchemaAlteringStatement extends CFStatement implements CQL
     {
         Event.SchemaChange ce = announceMigration(state, true);
         return ce == null ? new ResultMessage.Void() : new ResultMessage.SchemaChange(ce);
+    }
+    
+    @Override
+    public String toString()
+    {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 }

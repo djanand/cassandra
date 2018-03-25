@@ -31,6 +31,8 @@ import org.apache.cassandra.schema.ColumnMetadata;
 import org.apache.cassandra.schema.TableMetadata;
 import org.apache.cassandra.transport.ProtocolVersion;
 import org.apache.cassandra.utils.ByteBufferUtil;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 import static org.apache.cassandra.cql3.statements.RequestValidations.*;
 
@@ -835,5 +837,11 @@ public abstract class ColumnCondition
                 throw invalidRequest("Slice conditions ( %s ) are not supported on durations", operator);
             }
         }
+    }
+    
+    @Override
+    public String toString()
+    {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 }

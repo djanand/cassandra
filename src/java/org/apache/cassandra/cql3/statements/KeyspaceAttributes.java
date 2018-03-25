@@ -25,6 +25,8 @@ import org.apache.cassandra.exceptions.ConfigurationException;
 import org.apache.cassandra.schema.KeyspaceParams;
 import org.apache.cassandra.schema.KeyspaceParams.Option;
 import org.apache.cassandra.schema.ReplicationParams;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 public final class KeyspaceAttributes extends PropertyDefinitions
 {
@@ -87,5 +89,11 @@ public final class KeyspaceAttributes extends PropertyDefinitions
     public boolean hasOption(Option option)
     {
         return hasProperty(option.toString());
+    }
+    
+    @Override
+    public String toString()
+    {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 }
